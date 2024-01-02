@@ -24,23 +24,16 @@ function Main() {
       />
       <Canvas
         dpr={[1, 2]}
-
         gl={{
           localClippingEnabled: true,
           antialias: true,
           toneMapping: ACESFilmicToneMapping,
         }}
-        camera={{
-          fov: 55,
-          near: 0.1,
-          far: 200,
-          position: [3, 2, 9],
-        }}
         shadows
       >
         <Scene />
       </Canvas>
-    </div >
+    </div>
   )
 }
 

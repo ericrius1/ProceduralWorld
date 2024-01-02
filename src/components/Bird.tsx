@@ -2,6 +2,7 @@ import { useAnimations, useGLTF } from '@react-three/drei'
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
+import { useControls } from 'leva'
 
 const testMat = new THREE.MeshStandardMaterial()
 
@@ -10,7 +11,9 @@ export function Bird() {
   const { actions, ref } = useAnimations(animations, scene)
 
   useEffect(() => {
-    actions['Flying'].play()
+    if (actions['Flying']) {
+      actions['Flying'].play()
+    }
   }, [])
 
   useLayoutEffect(() => {
@@ -20,9 +23,10 @@ export function Bird() {
         child.frustumCulled = false
         // child.material = testMat
         // child.material.depthWrite = false
-        child.material.transparent = true
+        // child.material.transparent = true
         // debugger
         child.material.side = THREE.DoubleSide
+        // child.material = new THREE.MeshStandardMaterial({ ...child.material })
       }
     })
   }, [])
