@@ -8,6 +8,7 @@ import * as THREE from 'three'
 import { Bird } from './components/Bird'
 import { LightField } from './components/LightField'
 import { SkyStructures } from './components/SkyStructures'
+import { Bubbles } from './components/Bubbles'
 
 function Scene() {
   const { performance } = useControls('Monitoring', {
@@ -23,7 +24,8 @@ function Scene() {
       <OrbitControls makeDefault enableDamping={false} />
       {performance && <Perf position='top-left' />}
       <Bird />
-      <SkyStructures />
+      {/* <SkyStructures /> */}
+      <Bubbles />
       <LightField />
       <mesh scale={1} visible={false}>
         <boxGeometry args={[1, 1, 1]} />
