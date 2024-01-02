@@ -29,6 +29,7 @@ function Main() {
           antialias: true,
           toneMapping: ACESFilmicToneMapping,
         }}
+        background={{ color: '#242424' }}
         shadows
       >
         <Scene />

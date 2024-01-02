@@ -16,8 +16,10 @@ function Scene() {
 
   return (
     <>
-      <fog attach='fog' color='#242424' near={100} far={2000} />
-      <PerspectiveCamera makeDefault position={[0, 2, 5]} near={0.01} far={2000} />
+      <color attach='background' args={['#800080']} />
+
+      <fog attach='fog' color='#800080' near={100} far={10000} />
+      <PerspectiveCamera makeDefault position={[0, 2, 5]} near={0.01} far={10000} />
       <OrbitControls makeDefault enableDamping={false} />
       {performance && <Perf position='top-left' />}
       <Bird />
