@@ -5,8 +5,6 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { OrbitControls } from '@react-three/drei'
 
-const testMat = new THREE.MeshStandardMaterial()
-
 export function Bird() {
   console.log('render')
   const { scene, nodes, animations } = useGLTF('/models/macaw.glb')
@@ -16,6 +14,18 @@ export function Bird() {
 
   const velocity = useRef(0)
   const diffuse = useTexture('/textures/macaw/diffuse.png')
+  const testMat = new THREE.MeshStandardMaterial({ map: diffuse, envMapIntensity: 1.1 })
+  useControls({
+    timeDilation: {
+      value: 1,
+      min: 0,
+      max: 1.2,
+      step: 0.01,
+      onChange: (value) => {
+        if (actions['Flying']) actions['Flying'].timeScale = value
+      },
+    },
+  })
 
   useEffect(() => {
     if (actions['Flying']) {
