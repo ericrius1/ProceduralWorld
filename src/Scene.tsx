@@ -16,12 +16,16 @@ function Scene() {
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 0, 10]} near={0.01} far={1000} />
-      <OrbitControls makeDefault />
+      <PerspectiveCamera makeDefault position={[0, 5, 5]} near={0.01} far={10000} />
+      {/* <OrbitControls makeDefault /> */}
       {performance && <Perf position='top-left' />}
       <Bird />
-      <SkyStructures />
+      {/* <SkyStructures /> */}
       <LightField />
+      <mesh scale={1}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshBasicMaterial color='red' />
+      </mesh>
     </>
   )
 }

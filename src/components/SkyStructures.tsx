@@ -10,7 +10,7 @@ export function SkyStructures() {
     const position = new THREE.Vector3(
       (Math.random() - 0.5) * 1000,
       (Math.random() - 0.5) * 1000,
-      (Math.random() - 0.5) * 1000
+      (Math.random() - 0.5) * 10000
     )
     const scaleY = Math.random() * (100 - 10) + 10 // Random scale on the y component between 10 and 100 meters
     boxes.push({ size, color, rotation, position, scaleY })
@@ -18,7 +18,7 @@ export function SkyStructures() {
 
   useFrame(() => {
     boxes.forEach((box, i) => {
-      box.rotation += 0.01
+      box.rotation += 0.03
     })
   })
 
