@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { MathUtils } from 'three'
 
 const particles = Array.from({ length: 150 }, () => ({
-  factor: MathUtils.randInt(20, 100),
+  factor: MathUtils.randInt(20, 10000),
   speed: MathUtils.randFloat(0.01, 0.75),
   xFactor: MathUtils.randFloatSpread(40),
   yFactor: MathUtils.randFloatSpread(10),
