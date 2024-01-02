@@ -13,8 +13,8 @@ export function Model(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="container" position={[0.016, -6.529, 0]} rotation={[Math.PI, -0.001, Math.PI]} scale={0.1}>
-          <group name="bird" position={[-0.162, 3.015, 0]} scale={10}>
+        <group name="container" position={[0.025, -1.854, 0]} scale={0.3}>
+          <group name="bird" position={[-0.084, 6.179, 0]} scale={3.333}>
             <primitive object={nodes.base} />
             <skinnedMesh name="BODY" geometry={nodes.BODY.geometry} material={materials.material} skeleton={nodes.BODY.skeleton} />
             <skinnedMesh name="Cornea_L" geometry={nodes.Cornea_L.geometry} material={materials.cornea} skeleton={nodes.Cornea_L.skeleton} />
