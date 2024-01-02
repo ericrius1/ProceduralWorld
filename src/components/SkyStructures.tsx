@@ -3,14 +3,14 @@ import { useFrame } from '@react-three/fiber'
 
 export function SkyStructures() {
   const boxes = []
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 30000; i++) {
     const size = Math.random() * 10
     const color = new THREE.Color(Math.random() * 0xffffff)
     const rotation = Math.random() * Math.PI
     const position = new THREE.Vector3(
-      (Math.random() - 0.5) * 1000,
-      (Math.random() - 0.5) * 1000,
-      (Math.random() - 0.5) * 10000
+      (Math.random() - 0.5) * 10000,
+      (Math.random() - 0.5) * 10000,
+      (Math.random() - 0.5) * 100000
     )
     const scaleY = Math.random() * (100 - 10) + 10 // Random scale on the y component between 10 and 100 meters
     boxes.push({ size, color, rotation, position, scaleY })
