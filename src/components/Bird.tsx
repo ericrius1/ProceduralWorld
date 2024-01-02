@@ -12,7 +12,7 @@ export function Bird() {
   const { camera, controls } = useThree()
   // const orbitControls = controls as  OrbitControls;
 
-  const velocity = useRef(0)
+  const velocity = useRef(15.5) //in m/s
   const diffuse = useTexture('/textures/macaw/diffuse.png')
   const testMat = new THREE.MeshStandardMaterial({ map: diffuse, envMapIntensity: 1.1 })
   useControls({
@@ -45,10 +45,13 @@ export function Bird() {
 
   useFrame((state, delta) => {
     if (!ref.current || !controls) return
-    ref.current.position.z -= velocity.current
-    camera.position.z -= velocity.current
 
-    velocity.current += 0.1 * delta
+    const dZ = velocity.current * delta
+
+    ref.current.position.z -= dZ
+    camera.position.z -= dZ
+
+    console.log(ref.current.position.z)
     // camera.lookAt(ref.current.position)
     controls.target.copy(ref.current.position)
   })
