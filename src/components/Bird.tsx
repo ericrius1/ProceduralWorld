@@ -1,4 +1,9 @@
-import { useAnimations, useGLTF, useTexture } from '@react-three/drei'
+import {
+  useAnimations,
+  useGLTF,
+  useKeyboardControls,
+  useTexture,
+} from '@react-three/drei'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
@@ -9,7 +14,7 @@ export function Bird() {
   console.log('render')
   const { scene, nodes, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
-  const { camera, controls, pointer } = useThree()
+  const { camera, controls } = useThree()
   // const orbitControls = controls as  OrbitControls;
 
   const velocity = useRef(15.5)
@@ -19,6 +24,8 @@ export function Bird() {
     () => new THREE.MeshStandardMaterial({ map: diffuse, envMapIntensity: 1.1 }),
     []
   )
+
+  const [, getKeyboardControls] = useKeyboardControls()
 
   console.log('rerender')
 
@@ -60,16 +67,20 @@ export function Bird() {
   }, [])
 
   useFrame((state, delta) => {
-    console.log(pointer.y)
     if (!ref.current || !controls) return
 
     const dZ = velocity.current * delta
 
-    ref.current.position.z -= dZ
+    ref.current.translateZ(-dZ)
     camera.position.z -= dZ
 
     // camera.lookAt(ref.current.position)
     controls.target.copy(ref.current.position)
+
+    if (getKeyboardControls().followPointerModifier) {
+      console.log('fly')
+      ref.current.rotateX(0.01)
+    }
   })
 
   return <primitive object={scene} ref={ref} />

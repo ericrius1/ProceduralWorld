@@ -24,7 +24,7 @@ function Scene() {
   return (
     <>
       <color attach='background' args={['#800080']} />
-      {/* <PointerLockControls /> */}
+      {/* <PointerLockControls makeDefault /> */}
       <fog attach='fog' color='#800080' near={100} far={10000} />
       <PerspectiveCamera makeDefault position={[0, 0, 50]} near={0.01} far={10000} />
       <OrbitControls makeDefault enableDamping={false} />
