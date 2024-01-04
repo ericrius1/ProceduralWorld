@@ -40,7 +40,7 @@ export function Bird() {
       },
     },
     timeDilation: {
-      value: 1,
+      value: 0.5,
       min: 0,
       max: 1.2,
       step: 0.01,
@@ -66,10 +66,12 @@ export function Bird() {
     })
   }, [])
 
-  useFrame((state, delta) => {
+  useFrame(({ pointer }, delta) => {
     if (!ref.current || !controls) return
 
     const dZ = velocity.current * delta
+
+    const pointer3D = new THREE.Vector3(pointer.x * 1, pointer.y * 1, -1)
 
     ref.current.translateZ(-dZ)
     camera.position.z -= dZ
@@ -78,8 +80,7 @@ export function Bird() {
     controls.target.copy(ref.current.position)
 
     if (getKeyboardControls().followPointerModifier) {
-      console.log('fly')
-      ref.current.rotateX(0.01)
+      ref.current.rotateX(pointer.y / 100)
     }
   })
 

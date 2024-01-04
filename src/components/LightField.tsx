@@ -18,7 +18,7 @@ export function LightField() {
             <GradientTexture
               stops={[0.0, 0.1, 0.49, 0.61, 0.9]} // As many stops as you want
               colors={['#a0a7a3', '#270628', '#500036', '#03574F', '#024729']} // Colors need to match the number of stops
-              size={1024} // Size is optional, default = 1024
+              size={2048} // Size is optional, default = 1024
             />
           </meshBasicMaterial>
         </mesh>

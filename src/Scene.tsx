@@ -13,7 +13,6 @@ import { BoxGeometry, Mesh, MeshBasicMaterial } from 'three'
 import * as THREE from 'three'
 import { Bird } from './components/Bird'
 import { LightField } from './components/LightField'
-import { SkyStructures } from './components/SkyStructures'
 import { Bubbles } from './components/Bubbles'
 
 function Scene() {
@@ -25,9 +24,14 @@ function Scene() {
     <>
       <color attach='background' args={['#800080']} />
       {/* <PointerLockControls makeDefault /> */}
-      <fog attach='fog' color='#800080' near={100} far={10000} />
-      <PerspectiveCamera makeDefault position={[0, 0, 50]} near={0.01} far={10000} />
-      <OrbitControls makeDefault enableDamping={false} />
+      <fog attach='fog' color='#800080' near={100} far={12000} />
+      <PerspectiveCamera makeDefault position={[0, 0, 50]} near={0.01} far={11000} />
+      <OrbitControls
+        makeDefault
+        enableDamping={true}
+        dampingFactor={0.0005}
+        zoomSpeed={0.1}
+      />
       {performance && <Perf position='top-left' />}
       <Bird />
       {/* <SkyStructures /> */}

@@ -2,7 +2,12 @@ import { Canvas } from '@react-three/fiber'
 import { Leva } from 'leva'
 import React, { useMemo } from 'react'
 import ReactDOM from 'react-dom/client'
-import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
+import {
+  ACESFilmicToneMapping,
+  AgXToneMapping,
+  ReinhardToneMapping,
+  sRGBEncoding,
+} from 'three'
 import { Scene } from './Scene'
 import './styles/main.css'
 import { KeyboardControls, KeyboardControlsEntry } from '@react-three/drei'
@@ -20,6 +25,7 @@ function Main() {
     <KeyboardControls map={controlsMap}>
       <div className='main'>
         <Leva
+          hidden
           collapsed={false}
           oneLineLabels={false}
           flat={true}
@@ -37,7 +43,7 @@ function Main() {
           gl={{
             localClippingEnabled: true,
             antialias: true,
-            toneMapping: ACESFilmicToneMapping,
+            toneMapping: AgXToneMapping,
           }}
           shadows
         >
