@@ -13,20 +13,18 @@ export function Model(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="container" position={[0.025, -1.854, 0]} scale={0.3}>
+        <group name="container" position={[0.025, -1.482, 0.014]} rotation={[Math.PI, 0, Math.PI]} scale={0.06}>
           <group name="bird" position={[-0.084, 6.179, 0]} scale={3.333}>
             <primitive object={nodes.base} />
-            <skinnedMesh name="BODY" geometry={nodes.BODY.geometry} material={materials.material} skeleton={nodes.BODY.skeleton} />
-            <skinnedMesh name="Cornea_L" geometry={nodes.Cornea_L.geometry} material={materials.cornea} skeleton={nodes.Cornea_L.skeleton} />
-            <skinnedMesh name="Cornea_R" geometry={nodes.Cornea_R.geometry} material={materials.cornea} skeleton={nodes.Cornea_R.skeleton} />
-            <skinnedMesh name="cover_feather" geometry={nodes.cover_feather.geometry} material={materials.material} skeleton={nodes.cover_feather.skeleton} />
-            <skinnedMesh name="Eye_L" geometry={nodes.Eye_L.geometry} material={materials.material} skeleton={nodes.Eye_L.skeleton} />
-            <skinnedMesh name="Eye_R" geometry={nodes.Eye_R.geometry} material={materials.material} skeleton={nodes.Eye_R.skeleton} />
-            <skinnedMesh name="FILM_L_1" geometry={nodes.FILM_L_1.geometry} material={materials.material} skeleton={nodes.FILM_L_1.skeleton} />
-            <skinnedMesh name="FILM_R_1" geometry={nodes.FILM_R_1.geometry} material={materials.material} skeleton={nodes.FILM_R_1.skeleton} />
-            <skinnedMesh name="tail_feathers" geometry={nodes.tail_feathers.geometry} material={materials.material} skeleton={nodes.tail_feathers.skeleton} />
-            <skinnedMesh name="Wings" geometry={nodes.Wings.geometry} material={materials.material} skeleton={nodes.Wings.skeleton} />
-            <skinnedMesh name="Wings001" geometry={nodes.Wings001.geometry} material={materials.material} skeleton={nodes.Wings001.skeleton} />
+            <skinnedMesh name="BODY" geometry={nodes.BODY.geometry} material={nodes.BODY.material} skeleton={nodes.BODY.skeleton} />
+            <skinnedMesh name="cover_feather" geometry={nodes.cover_feather.geometry} material={nodes.cover_feather.material} skeleton={nodes.cover_feather.skeleton} />
+            <skinnedMesh name="Eye_L" geometry={nodes.Eye_L.geometry} material={nodes.Eye_L.material} skeleton={nodes.Eye_L.skeleton} />
+            <skinnedMesh name="Eye_R" geometry={nodes.Eye_R.geometry} material={nodes.Eye_R.material} skeleton={nodes.Eye_R.skeleton} />
+            <skinnedMesh name="FILM_L_1" geometry={nodes.FILM_L_1.geometry} material={nodes.FILM_L_1.material} skeleton={nodes.FILM_L_1.skeleton} />
+            <skinnedMesh name="FILM_R_1" geometry={nodes.FILM_R_1.geometry} material={nodes.FILM_R_1.material} skeleton={nodes.FILM_R_1.skeleton} />
+            <skinnedMesh name="tail_feathers" geometry={nodes.tail_feathers.geometry} material={nodes.tail_feathers.material} skeleton={nodes.tail_feathers.skeleton} />
+            <skinnedMesh name="Wings" geometry={nodes.Wings.geometry} material={nodes.Wings.material} skeleton={nodes.Wings.skeleton} />
+            <skinnedMesh name="Wings001" geometry={nodes.Wings001.geometry} material={nodes.Wings001.material} skeleton={nodes.Wings001.skeleton} />
           </group>
         </group>
       </group>

@@ -1,4 +1,10 @@
-import { OrbitControls, PerspectiveCamera, Sky, useGLTF } from '@react-three/drei'
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  PointerLockControls,
+  Sky,
+  useGLTF,
+} from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
@@ -18,9 +24,9 @@ function Scene() {
   return (
     <>
       <color attach='background' args={['#800080']} />
-
+      {/* <PointerLockControls /> */}
       <fog attach='fog' color='#800080' near={100} far={10000} />
-      <PerspectiveCamera makeDefault position={[0, 2, 5]} near={0.01} far={10000} />
+      <PerspectiveCamera makeDefault position={[0, 0, 50]} near={0.01} far={10000} />
       <OrbitControls makeDefault enableDamping={false} />
       {performance && <Perf position='top-left' />}
       <Bird />
