@@ -1,6 +1,6 @@
 import { createRef } from 'react'
-import create from 'zustand'
-import shallow from 'zustand/shallow'
+import { create } from 'zustand'
+import { shallow } from 'zustand/shallow'
 import type { RefObject } from 'react'
 import type { Group } from 'three'
 import type { GetState, SetState, StateSelector } from 'zustand'
@@ -21,7 +21,6 @@ export const booleans = {
   debug: false,
   editor: false,
   help: false,
-  leaderboard: false,
   map: true,
   pickcolor: false,
   ready: false,
@@ -32,7 +31,7 @@ export const booleans = {
 
 type Booleans = keyof typeof booleans
 
-const exclusiveBooleans = ['help', 'leaderboard', 'pickcolor'] as const
+const exclusiveBooleans = ['help', 'pickcolor'] as const
 type ExclusiveBoolean = (typeof exclusiveBooleans)[number]
 const isExclusiveBoolean = (v: unknown): v is ExclusiveBoolean =>
   exclusiveBooleans.includes(v as ExclusiveBoolean)
@@ -44,7 +43,6 @@ const controls = {
   boost: false,
   brake: false,
   forward: false,
-  honk: false,
   left: false,
   right: false,
 }
@@ -70,8 +68,6 @@ const actionInputMap: ActionInputMap = {
   editor: ['.'],
   forward: ['arrowup', 'w', 'z'],
   help: ['i'],
-  honk: ['h'],
-  leaderboard: ['l'],
   left: ['arrowleft', 'a', 'q'],
   map: ['m'],
   pickcolor: ['p'],

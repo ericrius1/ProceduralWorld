@@ -1,18 +1,16 @@
 import { Suspense, useEffect, useState } from 'react'
-import { Footer } from '@pmndrs/branding'
 import { useProgress } from '@react-three/drei'
 
 import type { ReactNode } from 'react'
 
 import { useStore } from '../store'
-import { setupSession } from '../data'
 import { Keys } from './Keys'
 
 export function Intro({ children }: { children: ReactNode }): JSX.Element {
   const [clicked, setClicked] = useState(false)
   const [loading, setLoading] = useState(true)
   const { progress } = useProgress()
-  const [session, set] = useStore((state) => [state.session, state.set])
+  const [set] = useStore((state) => [state.set])
 
   useEffect(() => {
     if (clicked && !loading) set({ ready: true })
@@ -21,10 +19,6 @@ export function Intro({ children }: { children: ReactNode }): JSX.Element {
   useEffect(() => {
     if (progress === 100) setLoading(false)
   }, [progress])
-
-  useEffect(() => {
-    setupSession(set)
-  }, [])
 
   return (
     <>
@@ -44,14 +38,6 @@ export function Intro({ children }: { children: ReactNode }): JSX.Element {
 
           <div>Hola Eric, ¿estás listo para aprender algo de español?</div>
         </div>
-        <Footer
-          date='2. June'
-          year='2021'
-          link1={
-            <a href='https://github.com/pmndrs/react-three-fiber'>@react-three/fiber</a>
-          }
-          link2={<a href='https://github.com/pmndrs/racing-game'>/racing-game</a>}
-        />
       </div>
     </>
   )

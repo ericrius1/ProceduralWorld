@@ -36,7 +36,6 @@ const actionDisplayMap: Record<
   editor: { displayName: 'Editor', order: 8 },
   forward: { displayName: 'Forward', order: 0 },
   help: { displayName: 'Help', order: 9 },
-  honk: { displayName: 'Honk', order: 5 },
   leaderboard: { displayName: 'Leaderboards', order: 10 },
   left: { displayName: 'Left', order: 2 },
   map: { displayName: 'Map', order: 11 },

@@ -23,6 +23,9 @@ dependencies:
   leva:
     specifier: ^0.9.35
     version: 0.9.35(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+  lodash-es:
+    specifier: ^4.17.21
+    version: 4.17.21
   maath:
     specifier: ^0.10.7
     version: 0.10.7(@types/three@0.160.0)(three@0.160.0)
@@ -1660,6 +1663,10 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+    dev: false
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
   /lodash.clamp@4.0.3:

@@ -1,13 +1,11 @@
-import { Environment, GradientTexture, useTexture } from '@react-three/drei'
+import { Environment, GradientTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
 
 // set up light panels for environment map
 export function LightField() {
   const backgroundMesh =
     useRef<THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>>(null)
-  const envMap = useTexture('/day.jpg')
 
   return (
     <>
