@@ -16,6 +16,8 @@ import { levelLayer, useStore } from './store'
 import { Editor, Intro } from './ui'
 import { useToggle } from './hooks/useToggle'
 import { LightField } from './components/LightField'
+import { Bird } from './components/Bird'
+import { Bubbles } from './components/Bubbles'
 
 const layers = new Layers()
 layers.enable(levelLayer)
@@ -28,10 +30,9 @@ export function App(): JSX.Element {
     s.editor,
     s.shadows,
   ])
-  const { onCheckpoint, onFinish, onStart } = actions
 
   const ToggledEditor = useToggle(Editor, 'editor')
-  const ToggledOrbitControls = useToggle(OrbitControls, 'editor')
+  const ToggledOrbitControls = useToggle(OrbitControls, 'ready')
   const ToggledStats = useToggle(Stats, 'stats')
 
   return (
@@ -40,10 +41,9 @@ export function App(): JSX.Element {
         key={`${dpr}${shadows}`}
         dpr={[1, dpr]}
         shadows={shadows}
-        camera={{ position: [0, 5, 15], fov: 50 }}
+        camera={{ position: [0, 5, 50], fov: 50, far: 70000 }}
       >
-        <fog attach='fog' args={['white', 0, 500]} />
-        <Sky sunPosition={[100, 10, 100]} distance={1000} />
+        <fog attach='fog' color='#800080' near={5000} far={120000} />
         <ambientLight layers={layers} intensity={0.1} />
         <directionalLight
           ref={setLight}
@@ -58,12 +58,20 @@ export function App(): JSX.Element {
           shadow-camera-bottom={-150}
           castShadow
         />
-        <PerspectiveCamera makeDefault={editor} fov={75} position={[0, 20, 20]} />
+
+        <mesh>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial color='red' />
+        </mesh>
+        <PerspectiveCamera makeDefault={editor} fov={75} position={[0, 20, 50]} />
 
         <LightField />
-        <ToggledOrbitControls />
+        <ToggledOrbitControls makeDefault />
+        <Bird />
+        <Bubbles />
       </Canvas>
       <ToggledEditor />
+
       <HideMouse />
       <Keyboard />
     </Intro>

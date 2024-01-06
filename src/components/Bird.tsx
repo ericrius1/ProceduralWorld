@@ -25,10 +25,6 @@ export function Bird() {
     []
   )
 
-  const [, getKeyboardControls] = useKeyboardControls()
-
-  console.log('rerender')
-
   useControls('bird', {
     envMapIntensity: {
       value: 1,
@@ -79,9 +75,7 @@ export function Bird() {
     // camera.lookAt(ref.current.position)
     controls.target.copy(ref.current.position)
 
-    if (getKeyboardControls().followPointerModifier) {
-      ref.current.rotateX(pointer.y / 100)
-    }
+    // ref.current.rotateX(pointer.y / 100)
   })
 
   return <primitive object={scene} ref={ref} />

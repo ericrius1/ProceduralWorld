@@ -19,7 +19,7 @@ export function Editor() {
     state.stats,
   ])
 
-  const [, setVehicleEditor] = useControls(() => ({
+  const [,] = useControls(() => ({
     Performance: folder({
       dpr: { value: dpr, min: 1, max: 2, step: 0.5, onChange: (dpr) => set({ dpr }) },
       shadows: { value: shadows, onChange: (shadows) => set({ shadows }) },
@@ -32,10 +32,7 @@ export function Editor() {
       },
       { collapsed: true }
     ),
-    reset: button(() => {
-      // @ts-expect-error -- FIXME: types xwhen using folders seem to be broken
-      setVehicleEditor(initialValues)
-    }),
+    reset: button(() => {}),
   }))
   return null
 }

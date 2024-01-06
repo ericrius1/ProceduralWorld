@@ -49,7 +49,7 @@ export function Bubbles() {
         <meshStandardMaterial
           roughness={0.5}
           metalness={0.3}
-          color={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+          // color={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
           envMapIntensity={0.5}
           normalMap={normalMap}
           normalMap-repeat={10}
