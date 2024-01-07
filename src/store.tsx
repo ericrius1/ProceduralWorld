@@ -3,7 +3,8 @@ import { create } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import type { RefObject } from 'react'
 import type { Group } from 'three'
-import type { GetState, SetState, StateSelector } from 'zustand'
+import type { StoreApi } from 'zustand'
+import { useShallow } from 'zustand/react/shallow'
 
 import { keys } from './keys'
 
@@ -76,28 +77,23 @@ const actionInputMap: ActionInputMap = {
   sound: ['u'],
 }
 
-type Getter = GetState<IState>
-export type Setter = SetState<IState>
+type Getter = StoreApi<IState>['getState']
+export type Setter = StoreApi<IState>['setState']
 
 type BaseState = Record<Booleans, boolean>
 
 type BooleanActions = Record<Booleans, () => void>
 type ControlActions = Record<Control, (v: boolean) => void>
-type TimerActions = Record<'onCheckpoint' | 'onFinish' | 'onStart', () => void>
 
 type Actions = BooleanActions &
-  ControlActions &
-  TimerActions & {
+  ControlActions & {
     camera: () => void
     reset: () => void
   }
 
 export interface IState extends BaseState {
   actions: Actions
-  bestCheckpoint: number
   camera: Camera
-  chassisBody: RefObject<Group>
-  checkpoint: number
   color: string
   controls: Controls
   actionInputMap: ActionInputMap
@@ -119,7 +115,8 @@ const setExclusiveBoolean = (set: Setter, boolean: ExclusiveBoolean) => () =>
     ),
   }))
 
-const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState>) => {
+const useStoreImpl = create<IState>((set: Setter, get: Getter) => {
+  // control actions are created dynamically for each control key
   const controlActions = keys(controls).reduce<Record<Control, (value: boolean) => void>>(
     (o, control) => {
       o[control] = (value: boolean) =>
@@ -146,22 +143,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
       set((state) => ({
         camera: cameras[(cameras.indexOf(state.camera) + 1) % cameras.length],
       })),
-    onCheckpoint: () => {
-      const { start } = get()
-      if (start) {
-        const checkpoint = Date.now() - start
-        set({ checkpoint })
-      }
-    },
-    onFinish: () => {
-      const { finished, start } = get()
-      if (start && !finished) {
-        set({ finished: Math.max(Date.now() - start, 0) })
-      }
-    },
-    onStart: () => {
-      set({ finished: 0, start: Date.now() })
-    },
+
     reset: () => {
       mutation.boost = maxBoost
     },
@@ -171,10 +153,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     ...booleans,
     actionInputMap,
     actions,
-    bestCheckpoint: 0,
     camera: cameras[0],
-    chassisBody: createRef<Group>(),
-    checkpoint: 0,
     color: '#FFFF00',
     controls,
     keyBindingsWithError: [],
@@ -203,8 +182,7 @@ export const mutation: Mutation = {
   velocity: [0, 0, 0],
 }
 
-// Make the store shallow compare by default
-const useStore = <T,>(sel: StateSelector<IState, T>) => useStoreImpl(sel, shallow)
+const useStore = <T,>(sel: (state: IState) => T) => useStoreImpl(sel)
 Object.assign(useStore, useStoreImpl)
 
 const { getState, setState } = useStoreImpl

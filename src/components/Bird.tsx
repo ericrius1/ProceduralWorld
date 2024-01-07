@@ -9,10 +9,10 @@ import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { OrbitControls } from '@react-three/drei'
-
+import { useToggle } from '../hooks/useToggle'
 export function Bird() {
   console.log('render')
-  const { scene, nodes, animations } = useGLTF('/models/macaw-transformed.glb')
+  const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
   const { camera, controls } = useThree()
   // const orbitControls = controls as  OrbitControls;
@@ -78,5 +78,9 @@ export function Bird() {
     // ref.current.rotateX(pointer.y / 100)
   })
 
-  return <primitive object={scene} ref={ref} />
+  return (
+    <>
+      <primitive object={scene} ref={ref} />
+    </>
+  )
 }
