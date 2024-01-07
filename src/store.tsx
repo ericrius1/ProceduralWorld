@@ -4,7 +4,6 @@ import { shallow } from 'zustand/shallow'
 import type { RefObject } from 'react'
 import type { Group } from 'three'
 import type { StoreApi } from 'zustand'
-import { useShallow } from 'zustand/react/shallow'
 
 import { keys } from './keys'
 
@@ -116,7 +115,7 @@ const setExclusiveBoolean = (set: Setter, boolean: ExclusiveBoolean) => () =>
   }))
 
 const useStoreImpl = create<IState>((set: Setter, get: Getter) => {
-  // control actions are created dynamically for each control key
+  // control actions are created dynamically for each control ke
   const controlActions = keys(controls).reduce<Record<Control, (value: boolean) => void>>(
     (o, control) => {
       o[control] = (value: boolean) =>
@@ -182,7 +181,8 @@ export const mutation: Mutation = {
   velocity: [0, 0, 0],
 }
 
-const useStore = <T,>(sel: (state: IState) => T) => useStoreImpl(sel)
+// Make the store shallow compare by default
+const useStore = <T,>(sel: StateSelector<IState, T>) => useStoreImpl(sel, shallow)
 Object.assign(useStore, useStoreImpl)
 
 const { getState, setState } = useStoreImpl
