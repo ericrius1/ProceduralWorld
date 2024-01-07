@@ -1,9 +1,8 @@
 import { createRef } from 'react'
-import { create } from 'zustand'
+import { create, StoreApi } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import type { RefObject } from 'react'
 import type { Group } from 'three'
-import type { StoreApi } from 'zustand'
 
 import { keys } from './keys'
 
@@ -19,7 +18,6 @@ export const rotation = [0, Math.PI / 2 + 0.35, 0] as const
 export const booleans = {
   binding: false,
   debug: false,
-  editor: false,
   help: false,
   map: true,
   pickcolor: false,
@@ -54,7 +52,7 @@ export const isControl = (v: PropertyKey): v is Control =>
 export type BindableActionName =
   | Control
   | ExclusiveBoolean
-  | Extract<Booleans, 'editor' | 'map' | 'sound'>
+  | Extract<Booleans, 'map' | 'sound'>
   | 'camera'
   | 'reset'
 
@@ -65,7 +63,6 @@ const actionInputMap: ActionInputMap = {
   boost: ['shift'],
   brake: [' '],
   camera: ['c'],
-  editor: ['.'],
   forward: ['arrowup', 'w', 'z'],
   help: ['i'],
   left: ['arrowleft', 'a', 'q'],
@@ -114,7 +111,7 @@ const setExclusiveBoolean = (set: Setter, boolean: ExclusiveBoolean) => () =>
     ),
   }))
 
-const useStoreImpl = create<IState>((set: Setter, get: Getter) => {
+const useStore = create<IState>()((set: Setter, get: Getter) => {
   // control actions are created dynamically for each control ke
   const controlActions = keys(controls).reduce<Record<Control, (value: boolean) => void>>(
     (o, control) => {
@@ -181,10 +178,4 @@ export const mutation: Mutation = {
   velocity: [0, 0, 0],
 }
 
-// Make the store shallow compare by default
-const useStore = <T,>(sel: StateSelector<IState, T>) => useStoreImpl(sel, shallow)
-Object.assign(useStore, useStoreImpl)
-
-const { getState, setState } = useStoreImpl
-
-export { getState, setState, useStore }
+export { useStore }

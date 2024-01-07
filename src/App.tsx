@@ -13,7 +13,7 @@ import type { DirectionalLight } from 'three'
 
 import { HideMouse, Keyboard } from './controls'
 import { levelLayer, useStore } from './store'
-import { Editor, Intro } from './ui'
+import { Intro } from './ui'
 import { useToggle } from './hooks/useToggle'
 import { LightField } from './components/LightField'
 import { Bird } from './components/Bird'
@@ -25,16 +25,9 @@ layers.enable(levelLayer)
 
 export function App(): JSX.Element {
   const [light, setLight] = useState<DirectionalLight | null>(null)
-  const [actions, dpr, editor, shadows] = useStore((s) => [
-    s.actions,
-    s.dpr,
-    s.editor,
-    s.shadows,
-  ])
+  const [actions, dpr, shadows] = useStore((s) => [s.actions, s.dpr, s.shadows])
 
-  const ToggledEditor = useToggle(Editor, 'editor')
   const ToggledOrbitControls = useToggle(OrbitControls, 'ready')
-  const ToggledPerf = useToggle(Perf, 'editor')
 
   return (
     <>
@@ -65,15 +58,12 @@ export function App(): JSX.Element {
             <boxGeometry args={[1, 1, 1]} />
             <meshBasicMaterial color='red' />
           </mesh>
-          <PerspectiveCamera makeDefault={editor} fov={75} position={[0, 20, 50]} />
 
           <LightField />
           <ToggledOrbitControls makeDefault />
           <Bird />
           <Bubbles />
-          <ToggledPerf position='top-left' />
         </Canvas>
-        <ToggledEditor />
 
         <HideMouse />
         <Keyboard />

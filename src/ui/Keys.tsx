@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import type { HTMLAttributes } from 'react'
 
 import { keys } from '../keys'
-import { setState, useStore } from '../store'
+import { useStore } from '../store'
 import type { ActionInputMap, BindableActionName } from '../store'
 
 const inputDisplayNameMap = {
@@ -33,7 +33,6 @@ const actionDisplayMap: Record<
   boost: { displayName: 'Turbo Boost', order: 6 },
   brake: { displayName: 'Drift', order: 4 },
   camera: { displayName: 'Toggle Camera', order: 14 },
-  editor: { displayName: 'Editor', order: 8 },
   forward: { displayName: 'Forward', order: 0 },
   help: { displayName: 'Help', order: 9 },
   left: { displayName: 'Left', order: 2 },
@@ -49,22 +48,15 @@ type RowProps = {
   hasError: boolean
   inputs: string[]
   onAdd: (actionName: BindableActionName) => void
-  onRemove: (actionName: BindableActionName, inpput: string) => void
 }
 
-function Row({ actionName, hasError, inputs, onAdd, onRemove }: RowProps): JSX.Element {
+function Row({ actionName, hasError, inputs, onAdd }: RowProps): JSX.Element {
   return (
     <div className={`keys-row popup-item${hasError ? ' with-error' : ''}`}>
       <div>{actionDisplayMap[actionName].displayName}</div>
       <div className='popup-item-keys'>
         {inputs.map((input, key) => (
-          <button
-            key={key}
-            onClick={() => {
-              onRemove(actionName, input)
-            }}
-            className='key-button popup-item-key'
-          >
+          <button key={key} className='key-button popup-item-key'>
             <span>
               {isInputWithDisplayName(input)
                 ? inputDisplayNameMap[input]
@@ -88,18 +80,6 @@ function Row({ actionName, hasError, inputs, onAdd, onRemove }: RowProps): JSX.E
 function Rows({ onAdd }: { onAdd: (actionName: BindableActionName) => void }) {
   const [actionInputMap] = useStore(({ actionInputMap }) => [actionInputMap])
 
-  const onRemove = useCallback((actionName: BindableActionName, input: string) => {
-    setState(({ actionInputMap, ...rest }) => {
-      return {
-        actionInputMap: {
-          ...actionInputMap,
-          [actionName]: actionInputMap[actionName].filter((v) => v !== input),
-        },
-        ...rest,
-      }
-    })
-  }, [])
-
   return (
     <>
       {keys(actionInputMap)
@@ -109,7 +89,6 @@ function Rows({ onAdd }: { onAdd: (actionName: BindableActionName) => void }) {
             key={key}
             actionName={actionName}
             inputs={actionInputMap[actionName]}
-            onRemove={onRemove}
             onAdd={onAdd}
             hasError={!actionInputMap[actionName].length}
           />
