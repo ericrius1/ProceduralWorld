@@ -1,21 +1,17 @@
-import {
-  useAnimations,
-  useGLTF,
-  useKeyboardControls,
-  useTexture,
-} from '@react-three/drei'
+import { useAnimations, useGLTF, useTexture } from '@react-three/drei'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
-import { OrbitControls } from '@react-three/drei'
-import { useToggle } from '../hooks/useToggle'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
 export function Bird() {
   console.log('render')
   const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
   const { camera, controls } = useThree()
-  // const orbitControls = controls as  OrbitControls;
+  // Assuming controls is an instance of OrbitControls
+  const orbitControls = controls as OrbitControls
 
   const velocity = useRef(15.5)
   //in m/s
@@ -54,10 +50,11 @@ export function Bird() {
 
   useLayoutEffect(() => {
     scene.traverse((child) => {
-      if ((child as any).isMesh) {
-        child.material = testMat
-        child.frustumCulled = false
-        child.material.side = THREE.DoubleSide
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh
+        mesh.material = testMat
+        mesh.frustumCulled = false
+        mesh.material.side = THREE.DoubleSide
       }
     })
   }, [])
@@ -73,7 +70,8 @@ export function Bird() {
     camera.position.z -= dZ
 
     // camera.lookAt(ref.current.position)
-    controls.target.copy(ref.current.position)
+
+    orbitControls.target.copy(ref.current.position)
 
     // ref.current.rotateX(pointer.y / 100)
   })
