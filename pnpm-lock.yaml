@@ -21,8 +21,8 @@ dependencies:
     specifier: ^10.16.16
     version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
   framer-motion-3d:
-    specifier: ^10.16.16
-    version: 10.16.16(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
+    specifier: ^10.17.9
+    version: 10.17.9(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
   leva:
     specifier: ^0.9.35
     version: 0.9.35(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -1533,8 +1533,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /framer-motion-3d@10.16.16(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0):
-    resolution: {integrity: sha512-5yKU0V5MHmCf/2LDVFV8xiGjf7T4p8qxZe06DSkwCOc0ZmWARfiWRM8tsfz3XzInJ3cOI13RJb3RKtjyKjXXNg==}
+  /framer-motion-3d@10.17.9(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0):
+    resolution: {integrity: sha512-hSFzlreU7Hvp181wBwAtUdrXIZ6DymcR46+YYOs/K9sON/G45B52qeREcXLe/qGEqU18g85yFiuQgSUfQgaexw==}
     peerDependencies:
       '@react-three/fiber': ^8.2.2
       react: '>=18.0'
@@ -1542,7 +1542,7 @@ packages:
       three: '>=0.133'
     dependencies:
       '@react-three/fiber': 8.15.12(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
-      framer-motion: 10.16.16(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 10.17.9(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-merge-refs: 2.1.1
@@ -1551,6 +1551,24 @@ packages:
 
   /framer-motion@10.16.16(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-je6j91rd7NmUX7L1XHouwJ4v3R+SO4umso2LUcgOct3rHZ0PajZ80ETYZTajzEXEl9DlKyzjyt4AvGQ+lrebOw==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
+  /framer-motion@10.17.9(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-z2NpP8r+XuALoPA7ZVZHm/OoTnwkQNJFBu91sC86o/FYvJ4x7ar3eQnixgwYWFK7kEqOtQ6whtNM37tn1KrOOA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
