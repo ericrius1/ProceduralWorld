@@ -47,10 +47,9 @@ type RowProps = {
   actionName: BindableActionName
   hasError: boolean
   inputs: string[]
-  onAdd: (actionName: BindableActionName) => void
 }
 
-function Row({ actionName, hasError, inputs, onAdd }: RowProps): JSX.Element {
+function Row({ actionName, hasError, inputs }: RowProps): JSX.Element {
   return (
     <div className={`keys-row popup-item${hasError ? ' with-error' : ''}`}>
       <div>{actionDisplayMap[actionName].displayName}</div>
@@ -64,20 +63,12 @@ function Row({ actionName, hasError, inputs, onAdd }: RowProps): JSX.Element {
             </span>
           </button>
         ))}
-        <button
-          className='add-button popup-item-key hovered-item'
-          onClick={() => {
-            onAdd(actionName)
-          }}
-        >
-          <span>+</span>
-        </button>
       </div>
     </div>
   )
 }
 
-function Rows({ onAdd }: { onAdd: (actionName: BindableActionName) => void }) {
+function Rows() {
   const [actionInputMap] = useStore(({ actionInputMap }) => [actionInputMap])
 
   return (
@@ -89,7 +80,6 @@ function Rows({ onAdd }: { onAdd: (actionName: BindableActionName) => void }) {
             key={key}
             actionName={actionName}
             inputs={actionInputMap[actionName]}
-            onAdd={onAdd}
             hasError={!actionInputMap[actionName].length}
           />
         ))}
@@ -127,13 +117,14 @@ export function Keys(props: KeysProps): JSX.Element {
     },
     [binding]
   )
+  const [set] = useStore((state) => [state.set])
 
   const onKeyup = useCallback(
     ({ key }: KeyboardEvent) => {
       if (!selectedAction) return
       const input = key.toLowerCase()
       if (input === 'escape') return setSelectedAction(null)
-      setState(({ actionInputMap, ...rest }) => {
+      set(({ actionInputMap, ...rest }) => {
         return {
           actionInputMap: keys(actionInputMap).reduce<ActionInputMap>(
             (o, actionName) => ({
@@ -157,7 +148,7 @@ export function Keys(props: KeysProps): JSX.Element {
   return (
     <>
       <div {...props}>
-        <Rows onAdd={onAdd} />
+        <Rows />
       </div>
       {selectedAction && <KeyInput onKeyup={onKeyup} />}
     </>
