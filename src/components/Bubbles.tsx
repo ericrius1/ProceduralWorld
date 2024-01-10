@@ -1,4 +1,4 @@
-import { Instances, Instance } from '@react-three/drei'
+import { Instances, Instance, MeshTransmissionMaterial } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { CanvasTexture, MathUtils, RepeatWrapping, UVMapping, Vector3 } from 'three'
@@ -25,36 +25,27 @@ export function Bubbles() {
 
   return (
     <>
-      <Instances limit={particles.length} castShadow receiveShadow position={[0, 2.5, 0]}>
-        <tetrahedronGeometry args={[0.45, 0]} />
+      <Instances
+        limit={particles.length}
+        castShadow
+        receiveShadow
+        position={[0, 2.5, 0]}
+        frustumCulled={false}
+      >
         <sphereGeometry args={[0.45, 15, 15]} />
 
-        <icosahedronGeometry args={[0.45, 0]} />
-        <meshStandardMaterial
+        <MeshTransmissionMaterial
           roughness={0.1}
-          metalness={1}
-          color={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-          envMapIntensity={0.5}
-          normalMap={normalMap}
-          normalMap-repeat={10}
-        />
-        {particles.slice(0, particles.length / 2).map((data, i) => {
-          return <Bubble key={i} position={data.position} scale={data.scale} />
-        })}
-      </Instances>
-
-      <Instances limit={particles.length} castShadow receiveShadow position={[0, 2.5, 0]}>
-        <tetrahedronGeometry args={[0.45, 0]} />
-        <sphereGeometry args={[0.45, 15, 15]} />
-        <meshStandardMaterial
-          roughness={0.5}
-          metalness={0.3}
+          metalness={0}
+          transmission={1}
           // color={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
           envMapIntensity={0.5}
           normalMap={normalMap}
           normalMap-repeat={10}
+          distortionScale={1}
+          temporalDistortion={1}
         />
-        {particles.slice(particles.length / 2, particles.length).map((data, i) => {
+        {particles.slice(0, particles.length / 2).map((data, i) => {
           return <Bubble key={i} position={data.position} scale={data.scale} />
         })}
       </Instances>

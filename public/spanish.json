@@ -1,0 +1,82 @@
+{
+  "Basic Phrases": {
+    "Spanish": [
+      "Hola, ¿cómo estás?",
+      "Me llamo Juan.",
+      "Gracias.",
+      "Por favor.",
+      "Adiós."
+    ],
+    "English": [
+      "Hello, how are you?",
+      "My name is John.",
+      "Thank you.",
+      "Please.",
+      "Goodbye."
+    ]
+  },
+  "Describing Things": {
+    "Spanish": [
+      "El cielo es azul.",
+      "El coche es rápido.",
+      "La comida está caliente.",
+      "El libro es interesante.",
+      "La casa es grande y blanca."
+    ],
+    "English": [
+      "The sky is blue.",
+      "The car is fast.",
+      "The food is hot.",
+      "The book is interesting.",
+      "The house is big and white."
+    ]
+  },
+  "Conversational": {
+    "Spanish": [
+      "¿Qué hiciste ayer?",
+      "Me gusta ir al cine.",
+      "No entiendo la pregunta.",
+      "¿Podrías hablar más despacio?",
+      "Ayer fui al parque con mis amigos."
+    ],
+    "English": [
+      "What did you do yesterday?",
+      "I like going to the movies.",
+      "I don’t understand the question.",
+      "Could you speak more slowly?",
+      "Yesterday I went to the park with my friends."
+    ]
+  },
+  "Complex Sentences": {
+    "Spanish": [
+      "Si tuviera dinero, viajaría por el mundo.",
+      "Cuando era niño, me gustaba jugar al fútbol.",
+      "Estoy aprendiendo español para mejorar mi carrera.",
+      "Si hubiera sabido, habría llegado temprano.",
+      "Aunque llueva, iré a la fiesta."
+    ],
+    "English": [
+      "If I had money, I would travel the world.",
+      "When I was a child, I liked to play soccer.",
+      "I am learning Spanish to improve my career.",
+      "If I had known, I would have arrived early.",
+      "Even if it rains, I will go to the party."
+    ]
+  },
+  "Advanced Expressions": {
+    "Spanish": [
+      "A pesar de sus esfuerzos, no logró el éxito.",
+      "Nunca había experimentado un silencio tan elocuente.",
+      "La película, aunque larga, mantuvo mi interés hasta el final.",
+      "Es tal su elocuencia que convence a cualquiera.",
+      "El libro aborda la complejidad de las emociones humanas."
+    ],
+    "English": [
+      "Despite his efforts, he did not achieve success.",
+      "I had never experienced such eloquent silence.",
+      "The movie, though long, held my interest to the end.",
+      "Such is his eloquence that he convinces anyone.",
+      "The book addresses the complexity of human emotions."
+    ]
+  }
+}

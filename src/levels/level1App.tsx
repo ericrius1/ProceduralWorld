@@ -11,14 +11,11 @@ import {
 
 import type { DirectionalLight } from 'three'
 
-import { HideMouse } from './controls'
-import { LightField } from './components/LightField'
-import { Bird } from './components/Bird'
-import { Bubbles } from './components/Bubbles'
+import { LightField } from '../components/LightField'
+import { Bird } from '../components/Bird'
 import { Perf } from 'r3f-perf'
-import { Card } from './components/Card'
 
-export function App(): JSX.Element {
+export function Level1App(): JSX.Element {
   const [light, setLight] = useState<DirectionalLight | null>(null)
 
   return (
@@ -33,13 +30,9 @@ export function App(): JSX.Element {
 
         <LightField />
         <OrbitControls makeDefault />
-        <Bird />
-        <Bubbles />
-        <Card />
+        {/* <Bird /> */}
         <Perf openByDefault trackGPU={true} position={'top-left'} />
       </Canvas>
-
-      <HideMouse />
     </>
   )
 }
