@@ -10,6 +10,11 @@ import { CanvasTexture, MathUtils, RepeatWrapping, UVMapping, Vector3 } from 'th
 import { FlakesTexture } from 'three-stdlib'
 const particles = Array.from({ length: 400 }, () => ({
   scale: MathUtils.randFloat(1, 200),
+  rotation: [
+    MathUtils.randFloat(0, 2 * Math.PI),
+    MathUtils.randFloat(0, 2 * Math.PI),
+    0,
+  ] as [number, number, number],
   position: [
     MathUtils.randFloatSpread(15000),
     MathUtils.randFloatSpread(10000),
@@ -60,16 +65,40 @@ export function Bubbles() {
           return <Bubble key={i} position={data.position} scale={data.scale} />
         })}
       </Instances>
+
+      <Instances
+        limit={particles.length}
+        castShadow
+        receiveShadow
+        position={[0, 2.5, 0]}
+        frustumCulled={false}
+      >
+        <sphereGeometry args={[0.35, 15, 15]} />
+
+        <meshBasicMaterial map={birdTexture} />
+        {particles.map((data, i) => {
+          return (
+            <Bubble
+              key={i}
+              position={data.position}
+              scale={data.scale}
+              rotation={data.rotation}
+            />
+          )
+        })}
+      </Instances>
     </>
   )
 }
 
 function Bubble({
   position,
+  rotation = [0, 0, 0],
   scale = 1,
 }: {
   position: [number, number, number]
+  rotation?: [number, number, number]
   scale: number
 }) {
-  return <Instance position={position} scale={scale} />
+  return <Instance position={position} scale={scale} rotation={rotation} />
 }
