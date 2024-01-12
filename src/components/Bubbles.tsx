@@ -42,6 +42,7 @@ export function Bubbles() {
           envMapIntensity={0.5}
           normalMap={normalMap}
           normalMap-repeat={10}
+          distortion={2}
           distortionScale={1}
           temporalDistortion={1}
         />

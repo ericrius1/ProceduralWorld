@@ -5,8 +5,9 @@ const data = await res.json()
 
 export function Card({ ...props }) {
   return (
-    <Html {...props}>
-      <div className='card'>{data.Conversational.Spanish[0]}</div>
+    <Html {...props} transform>
+      {/* <div className='card'>{data.Conversational.Spanish[0]}</div> */}
+      <div className='card'>Fly. Fly</div>
     </Html>
   )
 }

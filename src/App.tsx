@@ -17,7 +17,6 @@ import { Bird } from './components/Bird'
 import { Bubbles } from './components/Bubbles'
 import { Perf } from 'r3f-perf'
 import { Card } from './components/Card'
-
 export function App(): JSX.Element {
   const [light, setLight] = useState<DirectionalLight | null>(null)
 
@@ -26,16 +25,11 @@ export function App(): JSX.Element {
       <Canvas dpr={[1, 2]} camera={{ position: [0, 5, 50], fov: 50, far: 70000 }}>
         <fog attach='fog' color='#800080' near={5000} far={120000} />
 
-        <mesh>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshBasicMaterial color='red' />
-        </mesh>
-
         <LightField />
         <OrbitControls makeDefault />
         <Bird />
         <Bubbles />
-        <Card />
+        <Card position={[0, 5, -50]} occlude />
         <Perf openByDefault trackGPU={true} position={'top-left'} />
       </Canvas>
 
