@@ -15,7 +15,7 @@ export function Bird() {
 
   const velocity = useRef(15.5)
   //in m/s
-  const diffuse = useTexture('/textures/macaw/diffuse.png')
+  const diffuse = useTexture('/textures/macaw/diffuse.jpg')
   const testMat = useMemo(
     () => new THREE.MeshStandardMaterial({ map: diffuse, envMapIntensity: 1.1 }),
     []

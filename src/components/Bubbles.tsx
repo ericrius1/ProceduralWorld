@@ -1,4 +1,9 @@
-import { Instances, Instance, MeshTransmissionMaterial } from '@react-three/drei'
+import {
+  Instances,
+  Instance,
+  MeshTransmissionMaterial,
+  useTexture,
+} from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { CanvasTexture, MathUtils, RepeatWrapping, UVMapping, Vector3 } from 'three'
@@ -22,6 +27,11 @@ const normalMap = new CanvasTexture(
 
 export function Bubbles() {
   const ref = useRef()
+  const [birdTexture, dragonTexture, dolphinTexture] = useTexture([
+    '/textures/bubbles/bird.jpg',
+    '/textures/bubbles/dolphin.jpg',
+    '/textures/bubbles/dragon.jpg',
+  ])
 
   return (
     <>
@@ -46,7 +56,7 @@ export function Bubbles() {
           distortionScale={1}
           temporalDistortion={1}
         />
-        {particles.slice(0, particles.length / 2).map((data, i) => {
+        {particles.map((data, i) => {
           return <Bubble key={i} position={data.position} scale={data.scale} />
         })}
       </Instances>
