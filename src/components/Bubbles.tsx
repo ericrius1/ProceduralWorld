@@ -40,7 +40,7 @@ export function Bubbles() {
 
   return (
     <>
-      <Instances
+      {/* <Instances
         limit={particles.length}
         castShadow
         receiveShadow
@@ -64,7 +64,7 @@ export function Bubbles() {
         {particles.map((data, i) => {
           return <Bubble key={i} position={data.position} scale={data.scale} />
         })}
-      </Instances>
+      </Instances> */}
 
       <Instances
         limit={particles.length}
