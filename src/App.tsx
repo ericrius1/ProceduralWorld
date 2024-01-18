@@ -68,3 +68,5 @@ export function App(): JSX.Element {
     </>
   )
 }
+
+export { Controls }

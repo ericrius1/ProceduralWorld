@@ -11,18 +11,21 @@ import { useControls } from 'leva'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { damp3, dampQ } from 'maath/easing'
 import { Controls } from '../App'
+import { mapLinear } from 'three/src/math/MathUtils'
 
 const camTargetPosition = new THREE.Vector3()
 const camTargetQuaternion = new THREE.Quaternion()
+const upVector = new THREE.Vector3(0, 1, 0)
+const rightVector = new THREE.Vector3(1, 0, 0)
 export function Bird() {
-  console.log('render')
   const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
   const { camera, controls } = useThree()
   const camTarget = useRef<THREE.Mesh>(null)
   // Assuming controls is an instance of OrbitControls
   const orbitControls = controls as OrbitControls
-
+  const pitchSpeed = useRef(1)
+  const camFollowMaxSpeed = useRef(100)
   const [sub, get] = useKeyboardControls<Controls>()
 
   const velocity = useRef(15.5)
@@ -85,17 +88,19 @@ export function Bird() {
 
     orbitControls.target.copy(ref.current.position)
 
-    ref.current.rotateX(pointer.y * delta)
+    ref.current.rotateX(pointer.y * delta * pitchSpeed.current)
 
-    if (!get().toggleCamera) {
-      damp3(camera.position, camTargetPosition, 0.1, delta)
-      // dampQ(camera.quaternion, camTargetQuaternion, 0.1, delta)
+    if (Math.abs(ref.current.rotation.x) > 0.7) camFollowMaxSpeed.current = 10
+    else camFollowMaxSpeed.current = 100
+    if (!get().toggleCamera && Math.abs(ref.current.rotation.x) < 0.7) {
+      damp3(camera.position, camTargetPosition, 0.1, delta, camFollowMaxSpeed.current)
     }
+
     if (get().right) {
-      ref.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -delta)
+      ref.current.rotateOnWorldAxis(upVector, -delta)
     }
     if (get().left) {
-      ref.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), delta)
+      ref.current.rotateOnWorldAxis(upVector, delta)
     }
   })
 
