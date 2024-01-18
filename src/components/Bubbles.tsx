@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react'
 import { CanvasTexture, MathUtils, RepeatWrapping, UVMapping, Vector3 } from 'three'
 import { FlakesTexture } from 'three-stdlib'
 
-const particles = Array.from({ length: 10000 }, () => ({
+const particles = Array.from({ length: 1000 }, () => ({
   scale: MathUtils.randFloat(1, 200),
   rotation: [
     MathUtils.randFloat(0, 2 * Math.PI),
@@ -24,12 +24,6 @@ const particles = Array.from({ length: 10000 }, () => ({
 }))
 
 const flakesTexture = new FlakesTexture() as HTMLCanvasElement
-const normalMap = new CanvasTexture(
-  flakesTexture as HTMLCanvasElement,
-  UVMapping,
-  RepeatWrapping,
-  RepeatWrapping
-)
 
 export function Bubbles() {
   const ref = useRef()

@@ -89,8 +89,14 @@ export function Bird() {
 
     if (!get().toggleCamera) {
       damp3(camera.position, camTargetPosition, 0.1, delta)
+      // dampQ(camera.quaternion, camTargetQuaternion, 0.1, delta)
     }
-    // dampQ(camera.quaternion, camTargetQuaternion, 0.1, delta)
+    if (get().right) {
+      ref.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -delta)
+    }
+    if (get().left) {
+      ref.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), delta)
+    }
   })
 
   return (
