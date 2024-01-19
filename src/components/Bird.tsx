@@ -15,10 +15,10 @@ import { mapLinear } from 'three/src/math/MathUtils'
 
 const camTargetPosition = new THREE.Vector3()
 const camTargetQuaternion = new THREE.Quaternion()
-const upVector = new THREE.Vector3(0, 1, 0)
-const rightVector = new THREE.Vector3(1, 0, 0)
 const euler = new THREE.Euler(0, 0, 0, 'YXZ')
 let pitchAngle = 0
+const minPolarAngle = (-Math.PI / 4) * 0.98
+const maxPolarAngle = (Math.PI / 4) * 0.98
 const rotationVector = new THREE.Vector3()
 export function Bird() {
   const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
@@ -106,16 +106,18 @@ export function Bird() {
     if (get().left) {
       rotationVector.y = 1
     }
-    if (get().up) {
-      pitchAngle = Math.PI / 3
-    }
-    if (get().down) {
-      pitchAngle = -Math.PI / 3
-    }
-    rotationVector.x = pitchAngle
+
+    rotationVector.x = mapLinear(pointer.y, -1, 1, -Math.PI / 3, Math.PI / 3)
+
     euler.setFromQuaternion(ref.current.quaternion)
     euler.y += rotationVector.y * delta
     euler.x += rotationVector.x * delta
+
+    if (euler.x > maxPolarAngle) {
+      euler.x = maxPolarAngle
+    } else if (euler.x < minPolarAngle) {
+      euler.x = minPolarAngle
+    }
     ref.current.quaternion.setFromEuler(euler)
   })
 
