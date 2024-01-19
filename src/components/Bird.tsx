@@ -14,7 +14,6 @@ import { Controls } from '../App'
 import { mapLinear } from 'three/src/math/MathUtils'
 
 const camTargetPosition = new THREE.Vector3()
-const camTargetQuaternion = new THREE.Quaternion()
 const euler = new THREE.Euler(0, 0, 0, 'YXZ')
 let pitchAngle = 0
 const minPolarAngle = (-Math.PI / 4) * 0.98
@@ -23,13 +22,12 @@ const rotationVector = new THREE.Vector3()
 export function Bird() {
   const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
-  const { camera, controls } = useThree()
+  const { controls } = useThree()
   const camTarget = useRef<THREE.Mesh>(null)
   // Assuming controls is an instance of OrbitControls
   const orbitControls = controls as OrbitControls
-  const pitchSpeed = useRef(1)
-  const camFollowMaxSpeed = useRef(100)
-  const [sub, get] = useKeyboardControls<Controls>()
+  const camFollowMaxSpeed = useRef(1000)
+  const [, get] = useKeyboardControls<Controls>()
 
   const velocity = useRef(15.5)
   //in m/s
@@ -80,6 +78,12 @@ export function Bird() {
   useFrame(({ pointer, camera }, delta) => {
     if (!ref.current || !controls) return
 
+    if (get().boost) {
+      damp(velocity, 'current', 100, 0.1, delta)
+    } else {
+      damp(velocity, 'current', 15.5, 0.1, delta)
+    }
+
     const dZ = velocity.current * delta
 
     ref.current.translateZ(-dZ)
@@ -87,7 +91,6 @@ export function Bird() {
     // camera.lookAt(ref.current.position)
 
     camTarget.current?.getWorldPosition(camTargetPosition)
-    camTarget.current?.getWorldQuaternion(camTargetQuaternion)
 
     orbitControls.target.copy(ref.current.position)
 
@@ -106,12 +109,19 @@ export function Bird() {
     if (get().left) {
       rotationVector.y = 1
     }
+    if (get().rollLeft) {
+      rotationVector.z = 1
+    }
+    if (get().rollRight) {
+      rotationVector.z = -1
+    }
 
     rotationVector.x = mapLinear(pointer.y, -1, 1, -Math.PI / 3, Math.PI / 3)
 
     euler.setFromQuaternion(ref.current.quaternion)
     euler.y += rotationVector.y * delta
     euler.x += rotationVector.x * delta
+    euler.z += rotationVector.z * delta * 10
 
     if (euler.x > maxPolarAngle) {
       euler.x = maxPolarAngle

@@ -10,16 +10,16 @@ import { CanvasTexture, MathUtils, RepeatWrapping, UVMapping, Vector3 } from 'th
 import { FlakesTexture } from 'three-stdlib'
 
 const particles = Array.from({ length: 1000 }, () => ({
-  scale: MathUtils.randFloat(1, 200),
+  scale: MathUtils.randFloat(1, 100),
   rotation: [
     MathUtils.randFloat(0, 2 * Math.PI),
     MathUtils.randFloat(0, 2 * Math.PI),
     0,
   ] as [number, number, number],
   position: [
-    MathUtils.randFloatSpread(15000),
-    MathUtils.randFloatSpread(10000),
-    MathUtils.randFloatSpread(20000),
+    MathUtils.randFloatSpread(1500),
+    MathUtils.randFloatSpread(1000),
+    MathUtils.randFloatSpread(2000),
   ] as [number, number, number],
 }))
 

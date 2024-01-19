@@ -21,12 +21,14 @@ import { Perf } from 'r3f-perf'
 import { Card } from './components/Card'
 
 enum Controls {
-  forward = 'forward',
+  boost = 'boost',
   toggleCamera = 'toggleCamera',
   right = 'right',
   left = 'left',
   up = 'up',
   down = 'down',
+  rollRight = 'rollRight',
+  rollLeft = 'rollLeft',
 }
 
 type KeyboardControlsEntry<T extends string = string> = {
@@ -45,9 +47,9 @@ export function App(): JSX.Element {
     () => [
       { name: Controls.left, keys: ['ArrowLeft', 'KeyA'] },
       { name: Controls.right, keys: ['ArrowRight', 'KeyD'] },
-      { name: Controls.down, keys: ['ArrowDown', 'KeyS'] },
-      { name: Controls.up, keys: ['KeyW'] },
-      { name: Controls.down, keys: ['KeyS'] },
+      { name: Controls.boost, keys: ['KeyW'] },
+      { name: Controls.rollLeft, keys: ['KeyQ'] },
+      { name: Controls.rollRight, keys: ['KeyE'] },
       { name: Controls.toggleCamera, keys: ['c'] },
     ],
     []
