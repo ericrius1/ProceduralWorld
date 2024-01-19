@@ -25,6 +25,8 @@ enum Controls {
   toggleCamera = 'toggleCamera',
   right = 'right',
   left = 'left',
+  up = 'up',
+  down = 'down',
 }
 
 type KeyboardControlsEntry<T extends string = string> = {
@@ -41,10 +43,11 @@ export function App(): JSX.Element {
 
   const map = useMemo<KeyboardControlsEntry<Controls>[]>(
     () => [
-      { name: Controls.forward, keys: ['ArrowUp', 'KeyW'] },
       { name: Controls.left, keys: ['ArrowLeft', 'KeyA'] },
       { name: Controls.right, keys: ['ArrowRight', 'KeyD'] },
-
+      { name: Controls.down, keys: ['ArrowDown', 'KeyS'] },
+      { name: Controls.up, keys: ['KeyW'] },
+      { name: Controls.down, keys: ['KeyS'] },
       { name: Controls.toggleCamera, keys: ['c'] },
     ],
     []

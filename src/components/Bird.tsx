@@ -9,7 +9,7 @@ import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { damp3, dampQ } from 'maath/easing'
+import { damp3, damp } from 'maath/easing'
 import { Controls } from '../App'
 import { mapLinear } from 'three/src/math/MathUtils'
 
@@ -17,6 +17,9 @@ const camTargetPosition = new THREE.Vector3()
 const camTargetQuaternion = new THREE.Quaternion()
 const upVector = new THREE.Vector3(0, 1, 0)
 const rightVector = new THREE.Vector3(1, 0, 0)
+const euler = new THREE.Euler(0, 0, 0, 'YXZ')
+let pitchAngle = 0
+const rotationVector = new THREE.Vector3()
 export function Bird() {
   const { scene, animations } = useGLTF('/models/macaw-transformed.glb')
   const { actions, ref } = useAnimations(animations, scene)
@@ -88,20 +91,32 @@ export function Bird() {
 
     orbitControls.target.copy(ref.current.position)
 
-    ref.current.rotateX(pointer.y * delta * pitchSpeed.current)
+    // console.log(ref.current.rotation.x)
 
-    if (Math.abs(ref.current.rotation.x) > 0.7) camFollowMaxSpeed.current = 10
-    else camFollowMaxSpeed.current = 100
-    if (!get().toggleCamera && Math.abs(ref.current.rotation.x) < 0.7) {
+    if (!get().toggleCamera) {
       damp3(camera.position, camTargetPosition, 0.1, delta, camFollowMaxSpeed.current)
     }
 
+    pitchAngle = 0
+    rotationVector.y = 0
+    rotationVector.z = 0
     if (get().right) {
-      ref.current.rotateOnWorldAxis(upVector, -delta)
+      rotationVector.y = -1
     }
     if (get().left) {
-      ref.current.rotateOnWorldAxis(upVector, delta)
+      rotationVector.y = 1
     }
+    if (get().up) {
+      pitchAngle = Math.PI / 3
+    }
+    if (get().down) {
+      pitchAngle = -Math.PI / 3
+    }
+    rotationVector.x = pitchAngle
+    euler.setFromQuaternion(ref.current.quaternion)
+    euler.y += rotationVector.y * delta
+    euler.x += rotationVector.x * delta
+    ref.current.quaternion.setFromEuler(euler)
   })
 
   return (
