@@ -21,8 +21,8 @@ dependencies:
     specifier: ^10.16.16
     version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
   framer-motion-3d:
-    specifier: ^10.16.16
-    version: 10.16.16(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
+    specifier: ^11.0.14
+    version: 11.0.14(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
   leva:
     specifier: ^0.9.35
     version: 0.9.35(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -1556,8 +1556,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /framer-motion-3d@10.16.16(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0):
-    resolution: {integrity: sha512-5yKU0V5MHmCf/2LDVFV8xiGjf7T4p8qxZe06DSkwCOc0ZmWARfiWRM8tsfz3XzInJ3cOI13RJb3RKtjyKjXXNg==}
+  /framer-motion-3d@11.0.14(@react-three/fiber@8.15.12)(react-dom@18.2.0)(react@18.2.0)(three@0.160.0):
+    resolution: {integrity: sha512-aonMn+nkZxi4fNqfgJP8q2XUX6CAlZpgazvBdP8DfdqVzrGPnchUytNWq/QYRRpz2893Z12POtDsCY69w/GM4g==}
     peerDependencies:
       '@react-three/fiber': ^8.2.2
       react: '>=18.0'
@@ -1565,11 +1565,13 @@ packages:
       three: '>=0.133'
     dependencies:
       '@react-three/fiber': 8.15.12(react-dom@18.2.0)(react@18.2.0)(three@0.160.0)
-      framer-motion: 10.16.16(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 11.0.14(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-merge-refs: 2.1.1
       three: 0.160.0
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
     dev: false
 
   /framer-motion@10.16.16(react-dom@18.2.0)(react@18.2.0):
@@ -1588,6 +1590,25 @@ packages:
       tslib: 2.6.2
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
+  /framer-motion@11.0.14(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-RFjo2hB1MTW0EWsHQaXgVn0AEUDGxAs0ZL2vVjTTJJu3N7wFiLkmqTn5ysLjL+qKZ9jvfpKXDb9waN9AyLqk8g==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
     dev: false
 
   /fsevents@2.3.3:
